@@ -1,1 +1,94 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS S3 File Upload</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 400px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    margin: 15px 0;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#status {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Upload File to AWS S3</h1>
+    
+    <input type="file" id="fileInput">
+    <br>
+    <button onclick="uploadFile()">Upload</button>
+
+    <p id="status"></p>
+</div>
+
+<script>
+function uploadFile() {
+    const file = document.getElementById("fileInput").files[0];
+    const status = document.getElementById("status");
+
+    if (!file) {
+        status.innerText = "Please select a file!";
+        status.style.color = "red";
+        return;
+    }
+
+    status.innerText = "Uploading " + file.name + "...";
+
+    // Simulated Upload (Replace with backend API)
+    setTimeout(() => {
+        status.innerText = file.name + " uploaded successfully to S3!";
+        status.style.color = "green";
+    }, 2000);
+}
+</script>
+
+</body>
+</html>

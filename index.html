@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWS S3 File Upload</title>
+<title>AWS S3 Auto File Upload</title>
 
 <style>
 body {
@@ -35,24 +34,10 @@ input[type="file"] {
     margin: 15px 0;
 }
 
-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background: #0056b3;
-}
-
 #status {
     margin-top: 15px;
-    color: green;
     font-weight: bold;
+    color: green;
 }
 </style>
 </head>
@@ -61,10 +46,8 @@ button:hover {
 
 <div class="container">
     <h1>Upload File to AWS S3</h1>
-    
-    <input type="file" id="fileInput">
-    <br>
-    <button onclick="uploadFile()">Upload</button>
+
+    <input type="file" id="fileInput" onchange="uploadFile()">
 
     <p id="status"></p>
 </div>
@@ -81,8 +64,9 @@ function uploadFile() {
     }
 
     status.innerText = "Uploading " + file.name + "...";
+    status.style.color = "blue";
 
-    // Simulated Upload (Replace with backend API)
+    // Simulated Upload
     setTimeout(() => {
         status.innerText = file.name + " uploaded successfully to S3!";
         status.style.color = "green";

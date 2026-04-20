@@ -1,16 +1,18 @@
-name: Deploy to AWS using Python
+name: Auto Upload Image to S3 and Trigger AWS Pipeline
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'images/**'
 
 jobs:
-  deploy:
+  upload-image:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout GitHub Repository
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -18,15 +20,15 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Install Python Dependencies
         run: pip install boto3
 
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ap-south-1
 
-      - name: Run deployment script
-        run: python deploy.py
+      - name: Upload Image to AWS S3
+        run: python upload_to_s3.py
